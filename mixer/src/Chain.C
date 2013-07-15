@@ -88,6 +88,7 @@ Chain::Chain ( ) : Fl_Group( 0, 0, 100, 100, "")
 {
     _deleting = false;
     _engine = NULL;
+    _muted = false;
 
     int X = 0;
     int Y = 0;
@@ -803,6 +804,11 @@ Chain::process ( nframes_t nframes )
     for ( std::list<Module*>::const_iterator i = process_queue.begin(); i != process_queue.end(); ++i )
     {
         Module *m = *i;
+
+        if ( _muted )
+            m->set_muted( true );
+        else
+            m->set_muted( false );
 
         m->process( nframes );
     }

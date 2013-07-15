@@ -68,6 +68,7 @@ class Module : public Fl_Group, public Loggable {
 protected:
 
     volatile bool _bypass;
+    bool _muted;
 
 public:
 
@@ -463,4 +464,5 @@ public:
     virtual void command_deactivate ( void );
     virtual void command_remove ( void );
 
+    void set_muted ( bool m ) { _muted = m; }
 };

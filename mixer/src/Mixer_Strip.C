@@ -253,6 +253,10 @@ void Mixer_Strip::cb_handle(Fl_Widget* o) {
          if ( parent() )
              parent()->parent()->redraw();
     }
+    else if ( o == mute_button )
+    {
+        _chain->set_muted( (bool)mute_button->value() );
+    }
 }
 
 void Mixer_Strip::cb_handle(Fl_Widget* o, void* v) {
@@ -383,13 +387,13 @@ Mixer_Strip::init ( )
 
     set_visible_focus();
 
-     { Fl_Scalepack *o = new Fl_Scalepack( 2, 2, 116, 595 );
-         o->type( FL_VERTICAL );
-         o->spacing( 2 );
-         
-         { Fl_Box *o = color_box = new Fl_Box( 0,0, 25, 10 );
-             o->box(FL_FLAT_BOX);
-         }
+    { Fl_Scalepack *o = new Fl_Scalepack( 2, 2, 116, 595 );
+        o->type( Fl_Pack::VERTICAL );
+        o->spacing( 2 );
+
+        { Fl_Box *o = color_box = new Fl_Box( 0,0, 25, 10 );
+            o->box(FL_FLAT_BOX);
+        }
 
         { Fl_Pack *o = new Fl_Pack( 2, 2, 114, 100 );
             o->type( Fl_Pack::VERTICAL );
@@ -509,6 +513,31 @@ Mixer_Strip::init ( )
             }
 /*             o->end(); */
 /*         } */
+        { Fl_Scalepack *o = new Fl_Scalepack( 7, 143, 110, 18 );
+            o->type( Fl_Pack::HORIZONTAL );
+
+            { Fl_Button* o = mute_button = new Fl_Button(61, 183, 45, 22, "m");
+                o->type(1);
+                o->tooltip( "Mute" );
+                o->labelfont( FL_COURIER_BOLD );
+                o->labelsize(12);
+                o->color2( fl_color_average( FL_GRAY, FL_RED, 0.50 ));
+                o->callback( ((Fl_Callback*)cb_handle), this );
+                o->when(FL_WHEN_RELEASE);
+            }
+/*
+            { Fl_Button* o = solo_button = new Fl_Button(7, 143, 35, 25, "s");
+                o->tooltip( "Solo" );
+                o->type(1);
+                o->labelfont( FL_COURIER_BOLD );
+                o->labelsize(12);
+                o->when( FL_WHEN_RELEASE );
+                o->callback( ((Fl_Callback*)cb_handle), this );
+            }
+*/
+                o->end();
+            }
+
         o->end();
     }
 

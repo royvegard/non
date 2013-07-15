@@ -56,6 +56,7 @@ class Chain : public Fl_Group, public Loggable {
     void *_configure_outputs_userdata;
     
     bool _deleting;
+    bool _muted;
 
 private:
 
@@ -119,6 +120,7 @@ public:
     bool add ( Controller_Module *m );
     bool insert ( Module *m, Module *n );
     void add_control ( Controller_Module *m );
+    void set_muted ( bool m ) { _muted = m; }
 
     bool do_export ( const char *filename );
 

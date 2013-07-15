@@ -131,6 +131,7 @@ Module::init ( void )
     _chain = 0;
     _instances = 1;
     _bypass = 0;
+    _muted = false;
 
     box( FL_UP_BOX );
     labeltype( FL_NO_LABEL );
