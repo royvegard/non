@@ -693,7 +693,7 @@ dequeue_new_port ( void )
 
     if ( sizeof( int ) == jack_ringbuffer_peek( port_ringbuffer, (char*)&size, sizeof( int ) ) )
     {
-        if ( jack_ringbuffer_read_space( port_ringbuffer ) >= size );
+        if ( jack_ringbuffer_read_space( port_ringbuffer ) >= size )
         {
             struct port_notification_record *pr = malloc( size );
             

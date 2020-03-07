@@ -71,23 +71,23 @@ Plugin_Chooser::search ( const char *name, const char *author, const char *categ
                   ( p->audio_inputs == 1 && p->audio_outputs == 1 ) ) )
                 continue;
 
-                if ( p->audio_outputs == 0 || p->audio_inputs == 0 )
+            if ( p->audio_outputs == 0 || p->audio_inputs == 0 )
                 /* we don't support these */
                 continue;
 
-                if ( favorites > 0 && ! p->favorite )
+            if ( favorites > 0 && ! p->favorite )
+                continue;
+            
+            if ( strcmp( category, "Any" ) )
+            {
+                if ( !p->category.c_str() && strcmp( category, "Unclassified" ))
                     continue;
                 
-                if ( strcmp( category, "Any" ) )
-                {
-                    if ( !p->category.c_str() && strcmp( category, "Unclassified" ))
-                        continue;
-                    
-                    if (strncmp( p->category.c_str(), category, strlen( category )))
-                        continue;
-                }
+                if (strncmp( p->category.c_str(), category, strlen( category )))
+                    continue;
+            }
 
-                _plugin_rows.push_back( p );
+            _plugin_rows.push_back( p );
         }
     }
 
